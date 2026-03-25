@@ -1,0 +1,9 @@
+name = "ssi-next-app"
+compatibility_date = "2024-03-25"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+# [BẮT BUỘC] Thay YOUR_KV_NAMESPACE_ID bằng ID Không gian lưu trữ thật của bạn
+[[kv_namespaces]]
+binding = "SSI_DATA"
+id = "93f4485b275141af93af4035f4bae078"
