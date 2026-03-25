@@ -14,11 +14,11 @@ export default function Home() {
       setIsSpinning(true);
       setError(null);
       const res = await fetch("/api/data");
+      const json = await res.json().catch(() => ({}));
       
       if (!res.ok) {
-        throw new Error(`HTTP Error: ${res.status}`);
+        throw new Error(json.error || `HTTP Error: ${res.status}`);
       }
-      const json = await res.json();
       
       if (json.error) {
         throw new Error(json.error);
