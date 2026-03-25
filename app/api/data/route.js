@@ -6,6 +6,16 @@ export async function GET(request) {
   try {
     const { env } = getRequestContext();
     
+    if (!env || !env.SSI_DATA) {
+      const keys = env ? Object.keys(env).join(', ') : 'null';
+      return new Response(JSON.stringify({ 
+        error: `KV Binding 'SSI_DATA' missing. Available keys: [${keys}]. Please check Cloudflare Pages Settings -> Bindings -> KV for BOTH Production and Preview.` 
+      }), { 
+        status: 500, 
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+
     // Đọc dữ liệu CSV từ KV Namespace "SSI_DATA"
     const csvData = await env.SSI_DATA.get("dataSSI");
     
